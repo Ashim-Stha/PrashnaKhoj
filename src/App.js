@@ -17,16 +17,38 @@ const clientId =
   "1075111422641-fbhrcvc9ufrqrs9v91cghsr7qs7qrop6.apps.googleusercontent.com";
 
 function App() {
-  useEffect(() => {
-    function start() {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    }
+  // useEffect(() => {
+  //   function start() {
+  //     gapi.client.init({
+  //       clientId: clientId,
+  //       scope: "",
+  //     });
+  //   }
 
-    gapi.load("client:auth2", start);
-  });
+  //   gapi.load("client:auth2", start);
+  // });
+  function handleCallbackResponse(res) {
+    console.log("Encoded JWT ID token:" + res.credential);
+  }
+
+  useEffect(() => {
+    if (window.google && window.google.accounts) {
+      window.google.accounts.id.initialize({
+        client_id: clientId,
+        callback: handleCallbackResponse,
+      });
+
+      window.google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        {
+          theme: "outline",
+          sign: "large",
+        }
+      );
+    } else {
+      console.error("Google API not loaded.");
+    }
+  }, []);
 
   // var accessToken = gapi.auth.getToken().access_token;
   // console.log(accessToken);
@@ -40,8 +62,9 @@ function App() {
           <Route path="/results" element={<Results />} />
         </Routes>
       </BrowserRouter> */}
-      <Login />
-      <Logout />
+      {/* <Login />
+      <Logout /> */}
+      <div id="signInDiv"></div>
     </>
   );
 }
