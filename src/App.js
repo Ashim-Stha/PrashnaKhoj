@@ -6,18 +6,42 @@ import Section from "./Section";
 import ImageSec from "./ImageSec";
 import Filter from "./FIlter";
 
+import Login from "./Login";
+import Logout from "./Logout";
+import { gapi } from "gapi-script";
+
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { useEffect } from "react";
+
+const clientId =
+  "1075111422641-fbhrcvc9ufrqrs9v91cghsr7qs7qrop6.apps.googleusercontent.com";
+
 function App() {
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: clientId,
+        scope: "",
+      });
+    }
+
+    gapi.load("client:auth2", start);
+  });
+
+  // var accessToken = gapi.auth.getToken().access_token;
+  // console.log(accessToken);
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<ImageSec />} />
           <Route path="/results" element={<Results />} />
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <Login />
+      <Logout />
     </>
   );
 }
