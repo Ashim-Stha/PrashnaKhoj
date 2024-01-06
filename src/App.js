@@ -68,20 +68,21 @@ function App() {
   // console.log(accessToken);
   return (
     <>
-      {/* <BrowserRouter>
+      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<ImageSec />} />
           <Route path="/results" element={<Results />} />
         </Routes>
-      </BrowserRouter> */}
+      </BrowserRouter>
       {/* <Login />
       <Logout /> */}
-      <div id="signInDiv">
+      {/* <div id="signInDiv">
         {Object.keys(user).length != 0 && (
           <button onClick={(e) => handleSignOut}>Sign Out</button>
         )}
+
 
         {user && (
           <div>
@@ -89,7 +90,7 @@ function App() {
             <h3>{user.name}</h3>
           </div>
         )}
-      </div>
+      </div> */}
     </>
   );
 }
